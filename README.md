@@ -21,3 +21,7 @@ To draw, just click on the mesh :)
 The `Painter` collects all `MeshInstance`s nodes that are in group `paintable_group` or have a parent that is in `paintable_group`. It parses their `mesh` using `MeshDataTool`. For this to work, it any non-`ArrayMesh` to `ArrayMesh` to be able to initialize the `MeshDataTool`. It also sets the `overlay_material` to an all transparent texture (used to draw on).
 
 Painting is done by a brute-force ray cast. The painter iterates each face of each mesh and performs an `Geometry3D.ray_intersects_triangle()` to detect if the face was clicked. Since it is brute-force, all faces are processed to detect the face that is closest to the camera. If a hitpoint is detected, the corresponding UV coordinate is extracted via barycentric interpolation of the face vertex UVs. It then sets the corresponding pixel of the `overlay_material`'s texture (to red, right now).
+
+## Credits
+
+This project was heavily inspired by [Godot 4 Vertex Painter](https://github.com/bikemurt/godot-vertex-painter) and [In-game Splat Map Texture Painting](https://alfredbaudisch.com/blog/gamedev/godot-engine/godot-engine-in-game-splat-map-texture-painting-dirt-removal-effect/), basically copying their ideas.
