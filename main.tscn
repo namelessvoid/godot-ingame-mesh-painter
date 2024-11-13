@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp8tfw163rt1a"]
+
+[ext_resource type="PackedScene" uid="uid://cc3n35xie06k7" path="res://orbit_camera.tscn" id="1_r4m6i"]
+[ext_resource type="PackedScene" uid="uid://d07o0uyhbadg8" path="res://model.tscn" id="1_xufk5"]
+[ext_resource type="Script" path="res://painter.gd" id="2_affwc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3dhqi"]
+
+[sub_resource type="Sky" id="Sky_om6ww"]
+sky_material = SubResource("ProceduralSkyMaterial_3dhqi")
+
+[sub_resource type="Environment" id="Environment_vtd4g"]
+background_mode = 2
+sky = SubResource("Sky_om6ww")
+
+[sub_resource type="BoxMesh" id="BoxMesh_2vws2"]
+
+[node name="Main" type="Node3D"]
+
+[node name="Truck" parent="." groups=["paintable"] instance=ExtResource("1_xufk5")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="OrbitCamera" parent="." instance=ExtResource("1_r4m6i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.581292, 0)
+zoom = 4.0
+elevation = -20.0
+translation_speed = 0.0
+
+[node name="Painter" type="Node3D" parent="."]
+script = ExtResource("2_affwc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vtd4g")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["paintable"]]
+transform = Transform3D(0.965926, 0, 0.258819, 0.183013, 0.707107, -0.683013, -0.183013, 0.707107, 0.683013, -1.75993, 1, 0.577224)
+mesh = SubResource("BoxMesh_2vws2")
